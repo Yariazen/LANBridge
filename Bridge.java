@@ -24,26 +24,7 @@ class Handler implements URLHandler {
             String command = "powershell.exe \"" + scriptPath + "\"";
             Process powerShellProcess = Runtime.getRuntime().exec(command);
             powerShellProcess.getOutputStream().close();
-
-            StringBuilder str = new StringBuilder();
-            String line;
-
-            str.append("Standard Output:\n");
-            BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
-            while ((line = stdout.readLine()) != null) {
-                str.append(line).append("\n");
-            }
-            stdout.close();
-
-            str.append("Standard Error:\n");
-            BufferedReader stderr = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
-            while ((line = stderr.readLine()) != null) {
-                str.append(line).append("\n");
-            }
-            stderr.close();
-
-            str.append("Done\n");
-            return str.toString();
+            return "";
         } catch (IOException e) {
             return "Encountered unexpected error.";
         }
