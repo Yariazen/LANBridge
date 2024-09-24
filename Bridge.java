@@ -19,7 +19,7 @@ class Handler implements URLHandler {
         }
     }
 
-    public String handleScript(String scriptPath) {
+    public String handleScript(String scriptPath) throws IOException {
         String command = "powershell.exe \"" + scriptPath + "\"";
         Process powerShellProcess = Runtime.getRuntime().exec(command);
         powerShellProcess.getOutputStream().close();
