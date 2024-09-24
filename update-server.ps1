@@ -2,6 +2,7 @@ $pidFile = Join-Path $PSScriptRoot "pidfile.txt"
 $serverDir = $PSScriptRoot
 $startScript = Join-Path $PSScriptRoot "start-server.ps1"
 $javacPath = "javac"
+$askpass = Join-Path $PSScriptRoot "askpass.ps1"
 
 function Kill-Server {
 	if (Test-Path $pidFile) {
@@ -18,7 +19,9 @@ function Kill-Server {
 
 function Update-Code {
 	Write-Host "Pulling latest code from Github..."
-	git pull
+	$env:SSH_ASKPASS = $askpass
+	$command = "git pull"
+	$process = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $command" -PassThru -Wait
 	Write-Host "Code updated."
 }
 
