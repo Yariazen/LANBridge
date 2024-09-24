@@ -19,30 +19,34 @@ class Handler implements URLHandler {
         }
     }
 
-    public String handleScript(String scriptPath) throws IOException {
-        String command = "powershell.exe \"" + scriptPath + "\"";
-        Process powerShellProcess = Runtime.getRuntime().exec(command);
-        powerShellProcess.getOutputStream().close();
+    public String handleScript(String scriptPath) {
+        try {
+            String command = "powershell.exe \"" + scriptPath + "\"";
+            Process powerShellProcess = Runtime.getRuntime().exec(command);
+            powerShellProcess.getOutputStream().close();
 
-        StringBuilder str = new StringBuilder();
-        String line;
+            StringBuilder str = new StringBuilder();
+            String line;
 
-        str.append("Standard Output:\n");
-        BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
-        while ((line = stdout.readLine()) != null) {
-            str.append(line).append("\n");
+            str.append("Standard Output:\n");
+            BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
+            while ((line = stdout.readLine()) != null) {
+                str.append(line).append("\n");
+            }
+            stdout.close();
+
+            str.append("Standard Error:\n");
+            BufferedReader stderr = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
+            while ((line = stderr.readLine()) != null) {
+                str.append(line).append("\n");
+            }
+            stderr.close();
+
+            str.append("Done\n");
+            return str.toString();
+        } catch (IOException e) {
+            return "Encountered unexpected error."
         }
-        stdout.close();
-
-        str.append("Standard Error:\n");
-        BufferedReader stderr = new BufferedReader(new InputStreamReader(powerShellProcess.getErrorStream()));
-        while ((line = stderr.readLine()) != null) {
-            str.append(line).append("\n");
-        }
-        stderr.close();
-
-        str.append("Done\n");
-        return str.toString();
     }
 }
 
