@@ -3,8 +3,6 @@ $serverDir = $PSScriptRoot
 $startScript = Join-Path $PSScriptRoot "start-server.ps1"
 $javacPath = "javac"
 
-$test = Join-Path $PSScriptRoot "test.txt"
-
 function Kill-Server {
 	if (Test-Path $pidFile) {
 		$pidValue = Get-Content $pidFile
