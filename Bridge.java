@@ -31,7 +31,7 @@ class Handler implements URLHandler {
 }
 
 class Bridge {
-    static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         int port = 8080;
 
         Server.start(port, new Handler());
