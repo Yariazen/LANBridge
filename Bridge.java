@@ -45,7 +45,7 @@ class Handler implements URLHandler {
             str.append("Done\n");
             return str.toString();
         } catch (IOException e) {
-            return "Encountered unexpected error."
+            return "Encountered unexpected error.";
         }
     }
 }
