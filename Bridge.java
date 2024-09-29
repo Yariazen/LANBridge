@@ -18,25 +18,23 @@ class Handler implements URLHandler {
             return handleScript(scriptPath);
         } else if (url.getPath().equals("/start-minecraft")) {
             String query = url.getQuery(); 
-            return query;
-            /*if (query != null && query.startsWith("name=")) {
+            if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
                 return startServerWithConfig(serverName);
             } else {
                 return "400 Bad Request: Missing or invalid 'name' query parameter.";
             }
-            */
         } else if (url.getPath().equals("/stop-minecraft")) {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1];
                 return stopServer(serverName);
             } else {
-                return "400 Bad Request: Missing or invalid 'name' query parameter.";
+                return "400 Bad Request: Missing or invalid 'name' query parameter.\n";
             }
               
         } else {
-            return "404 Missing";
+            return "404 Missing.\n";
         }
     }
 
@@ -45,9 +43,9 @@ class Handler implements URLHandler {
             String command = "powershell.exe \"" + scriptPath + "\"";
             Process powerShellProcess = Runtime.getRuntime().exec(command);
             powerShellProcess.getOutputStream().close();
-            return scriptPath;
+            return scriptPath + "\n";
         } catch (IOException e) {
-            return "Encountered unexpected error.";
+            return "Encountered unexpected error.\n";
         }
     }
 
@@ -59,7 +57,7 @@ class Handler implements URLHandler {
                 "nogui", "-Xms1G", "-Xmx2G"
             );
         } else {
-            return "400 Bad Request: Unsupported server name.";
+            return "400 Bad Request: Unsupported server name.\n";
         }
     }
 
@@ -73,7 +71,7 @@ class Handler implements URLHandler {
             runningServers.put(serverName, jarProcess);
             return "";
         } catch (IOException e) {
-            return "Encountered unexpected error.";
+            return "Encountered unexpected error.\n";
         }
     }
 
