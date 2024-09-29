@@ -18,6 +18,7 @@ class Handler implements URLHandler {
             return handleScript(scriptPath);
         } else if (url.getPath().equals("/start-server")) {
             String query = url.getQuery(); 
+            return query;
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
                 return startServerWithConfig(serverName);
@@ -43,7 +44,7 @@ class Handler implements URLHandler {
             String command = "powershell.exe \"" + scriptPath + "\"";
             Process powerShellProcess = Runtime.getRuntime().exec(command);
             powerShellProcess.getOutputStream().close();
-            return "";
+            return scriptPath;
         } catch (IOException e) {
             return "Encountered unexpected error.";
         }
