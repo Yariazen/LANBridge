@@ -16,7 +16,7 @@ class Handler implements URLHandler {
         } else if (url.getPath().equals("/update-server")) {
             String scriptPath = currentDir + "\\update-server.ps1";
             return handleScript(scriptPath);
-        } else if () {
+        } else if (url.getPath().equals("/stop-server")) {
             String scriptPath = currentDir + "\\stop-server.ps1";
             return handleScript(scriptPath);
         } else if (url.getPath().equals("/start-minecraft")) {
