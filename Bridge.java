@@ -39,19 +39,20 @@ class Handler implements URLHandler {
                 "server.bat",
                 "C:\\Users\\Ash\\Server\\Vanilla",
                 serverName
-            )
+            );
         } else if (serverName.equalsIgnoreCase("ftb inferno")) {
             return runBatFile(
                 "run.bat",
                 "C:\\Users\\Ash\\Server\\FTB Inferno\\.minecraft",
                 serverName
-            )
+            );
         } else {
             return "400 Bad Request: Unsupported server name.\n";
         }
     }
 
     public String runBatFile(String batFile, String batFileDir, String serverName) {
+        try {
             String batFilePath = batFileDir + "\\" + batFile;
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/C", batFilePath);
             processBuilder.directory(new File(batFileDir));
