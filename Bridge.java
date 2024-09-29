@@ -15,7 +15,7 @@ class Handler implements URLHandler {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
-                return startServerWithConfig(serverName);
+                return startServer(serverName);
             } else {
                 return "400 Bad Request: Missing or invalid 'name' query parameter.";
             }
