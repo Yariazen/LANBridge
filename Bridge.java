@@ -19,12 +19,13 @@ class Handler implements URLHandler {
         } else if (url.getPath().equals("/start-server")) {
             String query = url.getQuery(); 
             return query;
-            if (query != null && query.startsWith("name=")) {
+            /*if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
                 return startServerWithConfig(serverName);
             } else {
                 return "400 Bad Request: Missing or invalid 'name' query parameter.";
             }
+            */
         } else if (url.getPath().equals("/stop-server")) {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
