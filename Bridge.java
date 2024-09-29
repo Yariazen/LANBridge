@@ -17,6 +17,7 @@ class Handler implements URLHandler {
             String scriptPath = currentDir + "\\update-server.ps1";
             return handleScript(scriptPath);
         } else if (url.getPath().equals("/start-server")) {
+            String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
                 return startServerWithConfig(serverName);
