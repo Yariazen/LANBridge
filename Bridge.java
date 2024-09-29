@@ -40,7 +40,7 @@ class Handler implements URLHandler {
                 "C:\\Users\\Ash\\Server\\Vanilla",
                 serverName
             );
-        } else if (serverName.equalsIgnoreCase("ftb inferno")) {
+        } else if (serverName.equalsIgnoreCase("ftb-inferno")) {
             return runBatFile(
                 "run.bat",
                 "C:\\Users\\Ash\\Server\\FTB Inferno\\.minecraft",
