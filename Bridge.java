@@ -81,9 +81,9 @@ class Handler implements URLHandler {
         if (serverProcess != null && serverProcess.isAlive()) {
             serverProcess.destroy();
             runningServers.remove(serverName);
-            return "Server '" + serverName + "' stopped.";
+            return "Server '" + serverName + "' stopped.\n";
         } else {
-            return "Server '" + serverName + "' is not running.";
+            return "Server '" + serverName + "' is not running.\n";
         }
     }
 }
