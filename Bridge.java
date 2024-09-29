@@ -59,8 +59,6 @@ class Handler implements URLHandler {
         } else {
             return "400 Bad Request: Unsupported server name.";
         }
-
-        return runJarFile(serverName, jarPath, args);
     }
 
     public String runJarFile(String serverName, String jarPath, String... args) {
