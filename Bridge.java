@@ -3,6 +3,7 @@ import java.net.URI;
 import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Hashtable;
 
 class Handler implements URLHandler {
     String currentDir = Paths.get("").toAbsolutePath().toString();
