@@ -66,10 +66,12 @@ class Handler implements URLHandler {
 
     public String runJarFile(String serverName, String jarPath, String... args) {
         try {
-            StringBuilder command = new StringBuilder("java -jar \"" + jarPath + "\"");
+            StringBuilder command = new StringBuilder("java -jar");
             for (String arg : args) {
                 command.append(" ").append(arg); 
             }
+            command.append("\"" + jarPath + "\" ");
+            command.append("nogui");
             return command.toString() + "\n";
             //Process jarProcess = Runtime.getRuntime().exec(command.toString());
             //runningServers.put(serverName, jarProcess);
