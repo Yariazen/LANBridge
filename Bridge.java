@@ -33,46 +33,35 @@ class Handler implements URLHandler {
         }
     }
 
-    public String handleScript(String scriptPath) {
-        try {
-            String command = "powershell.exe \"" + scriptPath + "\"";
-            Process powerShellProcess = Runtime.getRuntime().exec(command);
-            powerShellProcess.getOutputStream().close();
-            return scriptPath + "\n";
-        } catch (IOException e) {
-            return "Encountered unexpected error.\n";
-        }
-    }
-
-    public String startServerWithConfig(String serverName) {
+    public String startServer(String serverName) {
         if (serverName.equalsIgnoreCase("vanilla")) {
-            return runJarFile(
-                serverName,
+            return runBatFile(
+                "server.bat",
                 "C:\\Users\\Ash\\Server\\Vanilla",
-                "-Xms1G", "-Xmx2G"
-            );
+                serverName
+            )
+        } else if (serverName.equalsIgnoreCase("ftb inferno")) {
+            return runBatFile(
+                "run.bat",
+                "C:\\Users\\Ash\\Server\\FTB Inferno\\.minecraft",
+                serverName
+            )
         } else {
             return "400 Bad Request: Unsupported server name.\n";
         }
     }
 
-    public String runJarFile(String serverName, String jarPath, String... args) {
-        try {
-            StringBuilder command = new StringBuilder("java -jar");
-            for (String arg : args) {
-                command.append(" ").append(arg); 
-            }
-            command.append(" \"" + jarPath + "\\server.jar" + "\" ");
-            command.append("nogui");
+    public String runBatFile(String batFile, String batFileDir, String serverName) {
+            String batFilePath = batFileDir + "\\" + batFile;
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/C", batFilePath);
+            processBuilder.directory(new File(batFileDir));
 
-            ProcessBuilder processBuilder = new ProcessBuilder(command.toString().split(" "));
-            processBuilder.directory(new File(jarPath));
+            Process batProcess = processBuilder.start();
+            runningServers.put(serverName, batProcess);
 
-            Process jarProcess = processBuilder.start();
-            runningServers.put(serverName, jarProcess);
-            return command.toString() + "\n";
-        } catch (Exception e) {
-            return "Encountered unexpected error.\n";
+            return "Server started with PID: " + batProcess.pid() + "\n";
+        } catch (IOException e) {
+            return "Failed to run .bat file: " + e.getMessage() + "\n";
         }
     }
 
