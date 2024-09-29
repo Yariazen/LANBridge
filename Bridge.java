@@ -16,7 +16,7 @@ class Handler implements URLHandler {
         } else if (url.getPath().equals("/update-server")) {
             String scriptPath = currentDir + "\\update-server.ps1";
             return handleScript(scriptPath);
-        } else if (url.getPath().equals("/start-server")) {
+        } else if (url.getPath().equals("/start-minecraft")) {
             String query = url.getQuery(); 
             return query;
             /*if (query != null && query.startsWith("name=")) {
@@ -26,7 +26,7 @@ class Handler implements URLHandler {
                 return "400 Bad Request: Missing or invalid 'name' query parameter.";
             }
             */
-        } else if (url.getPath().equals("/stop-server")) {
+        } else if (url.getPath().equals("/stop-minecraft")) {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1];
