@@ -70,7 +70,7 @@ class Handler implements URLHandler {
             for (String arg : args) {
                 command.append(" ").append(arg); 
             }
-            command.append("\"" + jarPath + "\" ");
+            command.append(" \"" + jarPath + "\" ");
             command.append("nogui");
             return command.toString() + "\n";
             //Process jarProcess = Runtime.getRuntime().exec(command.toString());
