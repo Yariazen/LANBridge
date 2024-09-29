@@ -57,7 +57,7 @@ class Handler implements URLHandler {
             return runJarFile(
                 serverName,
                 "C:\\Users\\Ash\\Server\\Vanilla\\server.jar",
-                "nogui", "-Xms1G", "-Xmx2G"
+                "-Xms1G", "-Xmx2G"
             );
         } else {
             return "400 Bad Request: Unsupported server name.\n";
