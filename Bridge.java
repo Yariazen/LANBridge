@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Hashtable;
+import java.io.File;
 
 class Handler implements URLHandler {
     String currentDir = Paths.get("").toAbsolutePath().toString();
@@ -47,7 +48,7 @@ class Handler implements URLHandler {
         if (serverName.equalsIgnoreCase("vanilla")) {
             return runJarFile(
                 serverName,
-                "C:\\Users\\Ash\\Server\\Vanilla\\server.jar",
+                "C:\\Users\\Ash\\Server\\Vanilla",
                 "-Xms1G", "-Xmx2G"
             );
         } else {
@@ -61,10 +62,13 @@ class Handler implements URLHandler {
             for (String arg : args) {
                 command.append(" ").append(arg); 
             }
-            command.append(" \"" + jarPath + "\" ");
+            command.append(" \"" + jarPath + "\\server.jar" + "\" ");
             command.append("nogui");
 
-            Process jarProcess = Runtime.getRuntime().exec(command.toString());
+            ProcessBuilder processBuilder = new ProcessBuilder(command.toString().split(" "));
+            processBuilder.directory(new File(jarDirectory))
+
+            Process jarProcess = processBuilder.start();
             runningServers.put(serverName, jarProcess);
             return command.toString() + "\n";
         } catch (Exception e) {
