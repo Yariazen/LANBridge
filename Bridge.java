@@ -10,16 +10,7 @@ class Handler implements URLHandler {
     Hashtable<String, Process> runningServers = new Hashtable<>();
 
     public String handleRequest(URI url) {
-        if (url.getPath().equals("/start-server")) {
-            String scriptPath = currentDir + "\\start-server.ps1";
-            return handleScript(scriptPath);
-        } else if (url.getPath().equals("/update-server")) {
-            String scriptPath = currentDir + "\\update-server.ps1";
-            return handleScript(scriptPath);
-        } else if (url.getPath().equals("/stop-server")) {
-            String scriptPath = currentDir + "\\stop-server.ps1";
-            return handleScript(scriptPath);
-        } else if (url.getPath().equals("/start-minecraft")) {
+        if (url.getPath().equals("/start-minecraft")) {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
                 String serverName = query.split("=")[1]; 
@@ -72,10 +63,10 @@ class Handler implements URLHandler {
             }
             command.append(" \"" + jarPath + "\" ");
             command.append("nogui");
+
+            Process jarProcess = Runtime.getRuntime().exec(command.toString());
+            runningServers.put(serverName, jarProcess);
             return command.toString() + "\n";
-            //Process jarProcess = Runtime.getRuntime().exec(command.toString());
-            //runningServers.put(serverName, jarProcess);
-            //return "";
         } catch (Exception e) {
             return "Encountered unexpected error.\n";
         }
