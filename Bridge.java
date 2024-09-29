@@ -74,7 +74,7 @@ class Handler implements URLHandler {
             //Process jarProcess = Runtime.getRuntime().exec(command.toString());
             //runningServers.put(serverName, jarProcess);
             //return "";
-        } catch (IOException e) {
+        } catch (Exception e) {
             return "Encountered unexpected error.\n";
         }
     }
