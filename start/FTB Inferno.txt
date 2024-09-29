@@ -1,1 +1,0 @@
-java -jar -Xms8G -Xmx8G "C:\Users\Ash\Server\FTB Inferno\server.jar" nogui
