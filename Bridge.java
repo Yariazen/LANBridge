@@ -66,7 +66,7 @@ class Handler implements URLHandler {
             command.append("nogui");
 
             ProcessBuilder processBuilder = new ProcessBuilder(command.toString().split(" "));
-            processBuilder.directory(new File(jarDirectory));
+            processBuilder.directory(new File(jarPath));
 
             Process jarProcess = processBuilder.start();
             runningServers.put(serverName, jarProcess);
