@@ -16,6 +16,9 @@ class Handler implements URLHandler {
         } else if (url.getPath().equals("/update-server")) {
             String scriptPath = currentDir + "\\update-server.ps1";
             return handleScript(scriptPath);
+        } else if () {
+            String scriptPath = currentDir + "\\stop-server.ps1";
+            return handleScript(scriptPath);
         } else if (url.getPath().equals("/start-minecraft")) {
             String query = url.getQuery(); 
             if (query != null && query.startsWith("name=")) {
@@ -67,9 +70,10 @@ class Handler implements URLHandler {
             for (String arg : args) {
                 command.append(" ").append(arg); 
             }
-            Process jarProcess = Runtime.getRuntime().exec(command.toString());
-            runningServers.put(serverName, jarProcess);
-            return "";
+            return command.toString() + "\n";
+            //Process jarProcess = Runtime.getRuntime().exec(command.toString());
+            //runningServers.put(serverName, jarProcess);
+            //return "";
         } catch (IOException e) {
             return "Encountered unexpected error.\n";
         }
